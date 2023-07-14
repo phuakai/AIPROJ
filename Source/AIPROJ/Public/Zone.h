@@ -31,7 +31,7 @@ public:
 	UPROPERTY(EditAnywhere)
 		int customers;
 	UPROPERTY(EditAnywhere)
-		int waiters;
+		int cooksFree;
 	UPROPERTY(EditAnywhere)
 		TArray<ANPC*> NPCList;
 

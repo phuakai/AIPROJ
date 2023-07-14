@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Operator.h"
+#include "Zone.h"
 
 /**
  * 
@@ -13,21 +14,39 @@ class AIPROJ_API Task
 public:
 	Task();
 	~Task();
+
+	UPROPERTY()
+	AZone* theZone;
 };
 
 
-class AIPROJ_API PrimitiveTask : Task
+class AIPROJ_API PrimitiveTask :public Task
 {
 public:
-	void checkPrecondition();
+	virtual bool checkPrecondition();
 	Operator theOperator;
 	
 
 	
 };
 
-class AIPROJ_API CompoundTask : Task
+class AIPROJ_API CompoundTask :public Task
 {
 public:
-	TArray<Task> tasksList;
+	TArray<TArray<Task>> tasksList;
+};
+
+class AIPROJ_API makeDonut : public PrimitiveTask
+{
+public:
+	bool checkPrecondition();
+
+};
+
+class AIPROJ_API runDonutShopCompound :public CompoundTask
+{
+public:
+	//method?
+	runDonutShopCompound();
+	void checkShopStatus();
 };

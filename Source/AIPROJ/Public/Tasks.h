@@ -9,21 +9,31 @@
 /**
  * 
  */
+
+enum class Status
+{
+	PROCESSING,
+	FAILED,
+	SUCCESS
+};
+
 class AIPROJ_API Task
 {
 public:
 	Task();
 	~Task();
-
+	virtual bool checkPrecondition();
+	virtual void run();
 	UPROPERTY()
 	AZone* theZone;
+	Status currentStatus;
 };
 
 
 class AIPROJ_API PrimitiveTask :public Task
 {
 public:
-	virtual bool checkPrecondition();
+	
 	Operator theOperator;
 	
 
@@ -33,7 +43,14 @@ public:
 class AIPROJ_API CompoundTask :public Task
 {
 public:
-	TArray<TArray<Task>> tasksList;
+	bool checkPrecondition();
+	void run();
+	TArray<Task*> tasksList;
+	int currentTaskIndex;
+	
+	bool reset;
+
+	
 };
 
 class AIPROJ_API makeDonut : public PrimitiveTask

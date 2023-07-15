@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "NPC.h"
 #include "Operator.generated.h"
 /**
  * 
@@ -14,10 +15,21 @@ class AIPROJ_API UOperator :public UObject
 public:
 	UOperator();
 	~UOperator();
-	UFUNCTION(BlueprintNativeEvent, Category = "Operator Functions")
-	 void run();
+	UFUNCTION()
+	virtual void run(ANPC* source, ANPC* dest);
 
-	 void run_Implementation();
+
+};
+
+UCLASS()
+class AIPROJ_API UNavigateTo :public UOperator
+{
+	GENERATED_BODY()
+public:
+	UNavigateTo();
+	~UNavigateTo();
+	//UFUNCTION()
+		virtual void run(ANPC* source, ANPC* dest) override;
 
 
 };

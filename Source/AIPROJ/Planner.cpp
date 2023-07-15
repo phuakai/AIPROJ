@@ -14,8 +14,8 @@ APlanner::APlanner()
 // Called when the game starts or when spawned
 void APlanner::BeginPlay()
 {
-	runDonutShopCompound runDonutShop;
-	root = runDonutShop;
+	//runDonutShopCompound runDonutShop;
+	//root = runDonutShop;
 	Super::BeginPlay();
 	
 }

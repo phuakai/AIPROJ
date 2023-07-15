@@ -2,16 +2,15 @@
 
 
 #include "Operator.h"
-
-Operator::Operator()
+UOperator::UOperator()
 {
 }
 
-Operator::~Operator()
+UOperator::~UOperator()
 {
 }
 
-void Operator::run()
+void UOperator::run()
 {
 	
 }

@@ -3,22 +3,22 @@
 
 #include "Tasks.h"
 
-Task::Task()
+UTask::UTask()
 {
 }
 
-Task::~Task()
+UTask::~UTask()
 {
 }
 
 runDonutShopCompound::runDonutShopCompound()
 {
 	//first is cook donuts
-	makeDonut makeDonutTask;
-	TArray<Task> cookDonuts;
+	//makeDonut makeDonutTask;
+	//TArray<Task> cookDonuts;
 	
-	cookDonuts.Emplace(makeDonutTask);
-	tasksList.Emplace(cookDonuts);
+	//cookDonuts.Emplace(makeDonutTask);
+	//tasksList.Emplace(cookDonuts);
 	
 }
 
@@ -27,24 +27,24 @@ void runDonutShopCompound::checkShopStatus()
 	
 }
 
-bool makeDonut::checkPrecondition()
+bool UmakeDonut::checkPrecondition()
 {
 	if (theZone->cooksFree != 0)
 		return true;
 	return false;
 }
 
-bool Task::checkPrecondition()
+bool UTask::checkPrecondition()
 {
 	return false;
 }
 
-void Task::run()
+void UTask::run()
 {
 	return;
 }
 
-bool CompoundTask::checkPrecondition()
+bool UCompoundTask::checkPrecondition()
 {
 	for (auto& a : tasksList)
 	{
@@ -54,7 +54,7 @@ bool CompoundTask::checkPrecondition()
 	return true;
 }
 
-void CompoundTask::run()
+void UCompoundTask::run()
 {
 	if (reset)
 	{

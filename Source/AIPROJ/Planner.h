@@ -25,9 +25,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	TMap<ANPC, Task> queue;
-	TArray<Task> allTasks;
-	Task root;
+	//TMap<ANPC, UTask> queue;
+	//TArray<UTask> allTasks;
+	//UTask root;
 	 
 	void generatePlan();
 

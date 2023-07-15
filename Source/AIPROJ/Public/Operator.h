@@ -3,16 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
-
+#include "Operator.generated.h"
 /**
  * 
  */
-class AIPROJ_API Operator
+UCLASS()
+class AIPROJ_API UOperator :public UObject
 {
+	GENERATED_BODY()
 public:
-	Operator();
-	~Operator();
-
+	UOperator();
+	~UOperator();
+	UFUNCTION()
 	virtual void run();
 
 

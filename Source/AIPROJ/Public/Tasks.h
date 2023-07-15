@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Operator.h"
 #include "Zone.h"
+#include "Tasks.generated.h"
 
 /**
  * 
@@ -16,51 +17,60 @@ enum class Status
 	FAILED,
 	SUCCESS
 };
-
-class AIPROJ_API Task
+UCLASS()
+class AIPROJ_API UTask :public UObject
 {
+	GENERATED_BODY()
 public:
-	Task();
-	~Task();
+	UTask();
+	~UTask();
+	UFUNCTION()
 	virtual bool checkPrecondition();
+	UFUNCTION()
 	virtual void run();
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite)
 	AZone* theZone;
 	Status currentStatus;
 };
 
-
-class AIPROJ_API PrimitiveTask :public Task
+UCLASS(Blueprintable)
+class AIPROJ_API UPrimitiveTask :public UTask
 {
+	GENERATED_BODY()
 public:
-	
-	Operator theOperator;
+	UPROPERTY(BlueprintReadWrite)
+	UOperator* theOperator;
 	
 
 	
 };
-
-class AIPROJ_API CompoundTask :public Task
+UCLASS(Blueprintable)
+class AIPROJ_API UCompoundTask :public UTask
 {
+	GENERATED_BODY()
 public:
-	bool checkPrecondition();
+	bool checkPrecondition() override;
 	void run();
-	TArray<Task*> tasksList;
+	UPROPERTY(BlueprintReadWrite)
+	TArray<UTask*> tasksList;
+	UPROPERTY(BlueprintReadWrite)
 	int currentTaskIndex;
-	
+	UPROPERTY(BlueprintReadWrite)
 	bool reset;
 
 	
 };
-
-class AIPROJ_API makeDonut : public PrimitiveTask
+UCLASS()
+class AIPROJ_API UmakeDonut : public UPrimitiveTask
 {
+	GENERATED_BODY()
 public:
-	bool checkPrecondition();
+	
+	bool checkPrecondition() override;
 
 };
 
-class AIPROJ_API runDonutShopCompound :public CompoundTask
+class AIPROJ_API runDonutShopCompound :public UCompoundTask
 {
 public:
 	//method?

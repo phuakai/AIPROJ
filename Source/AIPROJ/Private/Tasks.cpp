@@ -71,8 +71,8 @@ void UCompoundTask::run()
 		currentStatus = Status::PROCESSING;
 		reset = false;
 	}
-	tasksList[currentTaskIndex]->run();
-	auto status = tasksList[currentTaskIndex]->currentStatus;
+	tasksList[currentTaskIndex].GetDefaultObject()->run();
+	auto status = tasksList[currentTaskIndex].GetDefaultObject()->currentStatus;
 
 	if (status == Status::FAILED)
 	{

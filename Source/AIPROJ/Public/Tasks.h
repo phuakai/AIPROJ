@@ -44,8 +44,8 @@ class AIPROJ_API UPrimitiveTask :public UTask
 {
 	GENERATED_BODY()
 public:
-	UPROPERTY(BlueprintReadWrite)
-	TSoftObjectPtr<UOperator> theOperator;
+
+
 	
 
 	
@@ -57,11 +57,11 @@ class AIPROJ_API UCompoundTask :public UTask
 public:
 
 	void run();
-	UPROPERTY(BlueprintReadWrite)
-	TArray<UTask*> tasksList;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TArray< TSubclassOf<UTask>> tasksList;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int currentTaskIndex;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool reset;
 };
 UCLASS()

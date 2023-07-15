@@ -24,14 +24,19 @@ class AIPROJ_API UTask :public UObject
 public:
 	UTask();
 	~UTask();
-	UFUNCTION()
-	virtual bool checkPrecondition();
-	UFUNCTION()
-	virtual void run();
-	UPROPERTY(BlueprintReadWrite)
-	AZone* theZone;
+	UFUNCTION(BlueprintNativeEvent, Category = "Task Functions")
+	bool checkPrecondition();
+
+	bool checkPrecondition_Implementation();
+	UFUNCTION(BlueprintNativeEvent, Category = "Task Functions")
+	void run();
+	void run_Implementation();
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TSoftObjectPtr<AZone> theZone;
 
 	Status currentStatus;
+
 };
 
 UCLASS(Blueprintable)
@@ -39,8 +44,8 @@ class AIPROJ_API UPrimitiveTask :public UTask
 {
 	GENERATED_BODY()
 public:
-	UPROPERTY(BlueprintReadWrite)
-	UOperator* theOperator;
+
+
 	
 
 	
@@ -50,13 +55,13 @@ class AIPROJ_API UCompoundTask :public UTask
 {
 	GENERATED_BODY()
 public:
-	bool checkPrecondition() override;
+
 	void run();
-	UPROPERTY(BlueprintReadWrite)
-	TArray<UTask*> tasksList;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TArray< TSubclassOf<UTask>> tasksList;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int currentTaskIndex;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool reset;
 };
 UCLASS()
@@ -65,10 +70,21 @@ class AIPROJ_API UBakeDonutPrimitive : public UPrimitiveTask
 	GENERATED_BODY()
 public:
 	
-	bool checkPrecondition() override;
-	void run() override;
+
 
 };
+
+UCLASS(Blueprintable)
+class AIPROJ_API UtestPT : public UPrimitiveTask
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY(BlueprintReadWrite)
+	int counter = 0;
+
+
+};
+
 
 class AIPROJ_API BeDonutShopCompound :public UCompoundTask
 {

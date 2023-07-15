@@ -8,7 +8,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable, BlueprintType)
 class AIPROJ_API UOperator :public UObject
 {
 	GENERATED_BODY()

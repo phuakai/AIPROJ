@@ -20,26 +20,28 @@ enum class Status
 class AIPROJ_API Task
 {
 public:
-	Task();
-	~Task();
-	virtual bool checkPrecondition();
-	virtual void run();
+	Task() { }
+	~Task() { }
+	virtual bool checkPrecondition()
+	{
+		return true;
+	}
+	virtual void run()
+	{
+		return;
+	}
+
 	UPROPERTY()
 	AZone* theZone;
+
 	Status currentStatus;
 };
-
 
 class AIPROJ_API PrimitiveTask :public Task
 {
 public:
-	
 	Operator theOperator;
-	
-
-	
 };
-
 class AIPROJ_API CompoundTask :public Task
 {
 public:
@@ -49,21 +51,19 @@ public:
 	int currentTaskIndex;
 	
 	bool reset;
-
-	
 };
 
-class AIPROJ_API makeDonut : public PrimitiveTask
+class AIPROJ_API BakeDonutPrimitive : public PrimitiveTask
 {
 public:
 	bool checkPrecondition();
-
+	void run();
 };
 
-class AIPROJ_API runDonutShopCompound :public CompoundTask
+class AIPROJ_API BeDonutShopCompound :public CompoundTask
 {
 public:
 	//method?
-	runDonutShopCompound();
+	BeDonutShopCompound();
 	void checkShopStatus();
 };

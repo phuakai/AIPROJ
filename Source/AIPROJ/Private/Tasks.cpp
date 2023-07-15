@@ -3,47 +3,6 @@
 
 #include "Tasks.h"
 
-Task::Task()
-{
-}
-
-Task::~Task()
-{
-}
-
-runDonutShopCompound::runDonutShopCompound()
-{
-	//first is cook donuts
-	makeDonut makeDonutTask;
-	TArray<Task> cookDonuts;
-	
-	cookDonuts.Emplace(makeDonutTask);
-	tasksList.Emplace(cookDonuts);
-	
-}
-
-void runDonutShopCompound::checkShopStatus()
-{
-	
-}
-
-bool makeDonut::checkPrecondition()
-{
-	if (theZone->cooksFree != 0)
-		return true;
-	return false;
-}
-
-bool Task::checkPrecondition()
-{
-	return false;
-}
-
-void Task::run()
-{
-	return;
-}
-
 bool CompoundTask::checkPrecondition()
 {
 	for (auto& a : tasksList)
@@ -81,4 +40,32 @@ void CompoundTask::run()
 			return;
 		}
 	}
+}
+
+bool BakeDonutPrimitive::checkPrecondition()
+{
+	if (theZone->cooksFree != 0)
+		return true;
+	return false;
+}
+
+void BakeDonutPrimitive::run()
+{
+	check(GEngine != nullptr);
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("okay it comes innnn"));
+}
+
+BeDonutShopCompound::BeDonutShopCompound()
+{
+	//first is cook donuts
+	//makeDonut makeDonutTask;
+	//TArray<Task> cookDonuts;
+	//
+	//cookDonuts.Emplace(makeDonutTask);
+	//tasksList.Emplace(cookDonuts);
+}
+
+void BeDonutShopCompound::checkShopStatus()
+{
+	
 }

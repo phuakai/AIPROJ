@@ -7,15 +7,17 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable, BlueprintType)
 class AIPROJ_API UOperator :public UObject
 {
 	GENERATED_BODY()
 public:
 	UOperator();
 	~UOperator();
-	UFUNCTION()
-	virtual void run();
+	UFUNCTION(BlueprintNativeEvent, Category = "Operator Functions")
+	 void run();
+
+	 void run_Implementation();
 
 
 };

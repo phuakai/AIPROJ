@@ -27,8 +27,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	TMap<ANPC, UTask*> queue;
 
-	//UPROPERTY(EditAnywhere)
-	TArray<UTask*> allTasks;
+	UPROPERTY(EditAnywhere)
+	TArray<TSubclassOf<UTask>> allTasks;
 
 	// Compund Tasks
 	BeDonutShopCompound* beDonutShop;
@@ -43,7 +43,7 @@ public:
 	AZone* donutShop;
 
 	//UPROPERTY(EditAnywhere)
-	TArray<UTask*> tasksInPlan;
+	TArray<TSubclassOf<UTask>> tasksInPlan;
 	 
 	void generatePlan();
 

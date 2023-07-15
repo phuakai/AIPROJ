@@ -25,7 +25,7 @@ void APlanner::BeginPlay()
 	}
 
 	// Stores all of the tasks
-	allTasks.Emplace(bakeDonutPrimitive);
+	//allTasks.Emplace(bakeDonutPrimitive);
 
 	// Constructing BeDonutShopCompound
 
@@ -40,11 +40,17 @@ void APlanner::Tick(float DeltaTime)
 	{
 		return;
 	}
+	static int counter = 0;
 
 	check(GEngine != nullptr);
 	GEngine->ClearOnScreenDebugMessages();
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("HIII :D"));
-
+	if(allTasks.Num() != 0)
+	allTasks[0].GetDefaultObject()->run();
+	//FString counterText;
+		
+	
+	//counter++;
 	if (donutShop->triggerPlanner)
 	{
 		generatePlan();
@@ -54,12 +60,12 @@ void APlanner::Tick(float DeltaTime)
 	for (int i = 0; i < tasksInPlan.Num(); ++i)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("weirdd"));
-		tasksInPlan[i]->run();
+		tasksInPlan[i].GetDefaultObject()->checkPrecondition();
 	}
 }
 
 void APlanner::generatePlan()
 {
-	tasksInPlan.Emplace(allTasks[0]);
+	//tasksInPlan.Emplace(allTasks[0]);
 }
 

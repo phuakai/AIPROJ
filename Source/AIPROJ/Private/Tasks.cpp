@@ -28,25 +28,40 @@ void BeDonutShopCompound::checkShopStatus()
 }
 
 
-bool UTask::checkPrecondition()
+bool UTask::checkPrecondition_Implementation()
 {
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("DEFAULT CLASS CHECK PRECONDITION"));
 	return false;
 }
 
-void UTask::run()
+void UTask::run_Implementation()
 {
-	return;
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("DEFAULT CLASS RUN"));
 }
 
-bool UCompoundTask::checkPrecondition()
-{
-	for (auto& a : tasksList)
-	{
-		if (!a->checkPrecondition())
-			return false;
-	}
-	return true;
-}
+//void UTask::run()
+//{
+//
+//	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("DEFAULT CLASS RUNNING"));
+//	return;
+//}
+
+
+
+//void UTask::test_Implementation()
+//{
+//	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("DEFAULT CLASS C++ TEST"));
+//}
+//
+//bool UCompoundTask::checkPrecondition()
+//{
+//	for (auto& a : tasksList)
+//	{
+//		if (!a->checkPrecondition())
+//			return false;
+//	}
+//	return true;
+//}
 
 void UCompoundTask::run()
 {
@@ -77,16 +92,32 @@ void UCompoundTask::run()
 	}
 }
 
-bool UBakeDonutPrimitive::checkPrecondition()
-{
-	if (theZone->cooksFree != 0)
-		return true;
-	return false;
-}
-
-void UBakeDonutPrimitive::run()
-{
-	check(GEngine != nullptr);
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("okay it comes innnn"));
-}
-
+//bool UBakeDonutPrimitive::checkPrecondition()
+//{
+//	if (theZone->cooksFree != 0)
+//		return true;
+//	return false;
+//}
+//
+//void UBakeDonutPrimitive::run()
+//{
+//	check(GEngine != nullptr);
+//	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("okay it comes innnn"));
+//}
+//
+//bool UtestPT::checkPrecondition(AZone& zone)
+//{
+//	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("testtt"));
+//	return false;
+//}
+//
+//void UtestPT::run()
+//{
+//	counter++;
+//	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("%i counter"), counter));
+//}
+//
+//void UtestPT::test_Implementation()
+//{
+//	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("%i C+++ VERSION"), counter));
+//}

@@ -10,7 +10,7 @@ UOperator::~UOperator()
 {
 }
 
-void UOperator::run()
+void UOperator::run_Implementation()
 {
-	
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("DEFAULT OPERATOR RUN"));
 }

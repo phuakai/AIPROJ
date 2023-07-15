@@ -82,3 +82,31 @@ void UCompoundTask::run()
 		}
 	}
 }
+
+bool BakeDonutPrimitive::checkPrecondition()
+{
+	if (theZone->cooksFree != 0)
+		return true;
+	return false;
+}
+
+void BakeDonutPrimitive::run()
+{
+	check(GEngine != nullptr);
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("okay it comes innnn"));
+}
+
+BeDonutShopCompound::BeDonutShopCompound()
+{
+	//first is cook donuts
+	//makeDonut makeDonutTask;
+	//TArray<Task> cookDonuts;
+	//
+	//cookDonuts.Emplace(makeDonutTask);
+	//tasksList.Emplace(cookDonuts);
+}
+
+void BeDonutShopCompound::checkShopStatus()
+{
+	
+}

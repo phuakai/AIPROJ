@@ -30,6 +30,7 @@ public:
 	virtual void run();
 	UPROPERTY(BlueprintReadWrite)
 	AZone* theZone;
+
 	Status currentStatus;
 };
 
@@ -57,8 +58,6 @@ public:
 	int currentTaskIndex;
 	UPROPERTY(BlueprintReadWrite)
 	bool reset;
-
-	
 };
 UCLASS()
 class AIPROJ_API UmakeDonut : public UPrimitiveTask
@@ -74,6 +73,6 @@ class AIPROJ_API runDonutShopCompound :public UCompoundTask
 {
 public:
 	//method?
-	runDonutShopCompound();
+	BeDonutShopCompound();
 	void checkShopStatus();
 };

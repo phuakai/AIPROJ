@@ -35,4 +35,53 @@ public:
 	UPROPERTY(EditAnywhere)
 		TArray<ANPC*> NPCList;
 
+	UPROPERTY(EditAnywhere)
+	bool triggerPlanner = false;
+
+	// Getter / setter
+	// Setters trigger planner to run generatePlan()
+	// Donut
+	int getDonut()
+	{
+		return donuts;
+	}
+	void setDonut(int _donuts)
+	{
+		donuts = _donuts;
+		triggerPlanner = true;
+	}
+
+	// Tables
+	int getTables()
+	{
+		return tables;
+	}
+	void setTables(int _tables)
+	{
+		tables = _tables;
+		triggerPlanner = true;
+	}
+
+	// Customers
+	int getCustomers()
+	{
+		return customers;
+	}
+	void setCustomers(int _customers)
+	{
+		customers = _customers;
+		triggerPlanner = true;
+	}
+
+	// CooksFree
+	int getCooksFree()
+	{
+		return cooksFree;
+	}
+	void setCooksFree(int _cooksFree)
+	{
+		cooksFree = _cooksFree;
+		triggerPlanner = true;
+	}
+
 };

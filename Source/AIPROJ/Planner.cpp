@@ -43,10 +43,9 @@ void APlanner::Tick(float DeltaTime)
 	static int counter = 0;
 
 	check(GEngine != nullptr);
-	GEngine->ClearOnScreenDebugMessages();
+	//GEngine->ClearOnScreenDebugMessages();
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("HIII :D"));
-	if(allTasks.Num() != 0)
-	allTasks[0].GetDefaultObject()->run();
+
 	//FString counterText;
 		
 	
@@ -59,13 +58,31 @@ void APlanner::Tick(float DeltaTime)
 
 	for (int i = 0; i < tasksInPlan.Num(); ++i)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("weirdd"));
-		tasksInPlan[i].GetDefaultObject()->checkPrecondition();
+		tasksInPlan[i].GetDefaultObject()->run();
+
+		if (tasksInPlan[i].GetDefaultObject()->currentStatus == EStatus::SUCCESS ||
+			tasksInPlan[i].GetDefaultObject()->currentStatus == EStatus::FAILED)
+		{
+			tasksInPlan[i].GetDefaultObject()->currentStatus = EStatus::PROCESSING;
+			donutShop->triggerPlanner = true;
+			//tasksInPlan[i].GetDefaultObject()->freeResouces();
+			//tasksInPlan.RemoveAt(i);
+			//--i;
+		}
 	}
 }
 
 void APlanner::generatePlan()
 {
-	//tasksInPlan.Emplace(allTasks[0]);
+	for (int i = 0; i < allTasks.Num(); ++i)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("its hereee"));
+		if (allTasks[i].GetDefaultObject()->checkPrecondition() && !tasksInPlan.Contains(allTasks[i]))
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("its in"));
+			tasksInPlan.Emplace(allTasks[i]);
+			allTasks[i].GetDefaultObject()->reserveResouces();
+		}
+	}
 }
 

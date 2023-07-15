@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "NPC.h"
 #include "Operator.generated.h"
 /**
  * 
@@ -15,7 +16,20 @@ public:
 	UOperator();
 	~UOperator();
 	UFUNCTION()
-	virtual void run();
+	virtual void run(ANPC* source, ANPC* dest);
+
+
+};
+
+UCLASS()
+class AIPROJ_API UNavigateTo :public UOperator
+{
+	GENERATED_BODY()
+public:
+	UNavigateTo();
+	~UNavigateTo();
+	//UFUNCTION()
+		virtual void run(ANPC* source, ANPC* dest) override;
 
 
 };

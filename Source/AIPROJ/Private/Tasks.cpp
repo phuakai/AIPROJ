@@ -39,6 +39,16 @@ void UTask::run_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("DEFAULT CLASS RUN"));
 }
 
+void UTask::reserveResouces_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("DEFAULT CLASS RESERVE RESOURCES"));
+}
+
+void UTask::freeResouces_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("DEFAULT CLASS FREE RESOURCES"));
+}
+
 //void UTask::run()
 //{
 //
@@ -63,32 +73,34 @@ void UTask::run_Implementation()
 //	return true;
 //}
 
-void UCompoundTask::run()
+void UCompoundTask::run_Implementation()
 {
 	if (reset)
 	{
 		currentTaskIndex = 0;
-		currentStatus = Status::PROCESSING;
+		currentStatus = EStatus::PROCESSING;
 		reset = false;
 	}
-	tasksList[currentTaskIndex].GetDefaultObject()->run();
-	auto status = tasksList[currentTaskIndex].GetDefaultObject()->currentStatus;
 
-	if (status == Status::FAILED)
+	if (currentTaskIndex == tasksList.Num())
 	{
-		currentStatus = Status::FAILED;
+		currentStatus = EStatus::SUCCESS;
 		reset = true;
 		return;
 	}
-	else if (status == Status::SUCCESS)
+
+	tasksList[currentTaskIndex].GetDefaultObject()->run();
+	auto status = tasksList[currentTaskIndex].GetDefaultObject()->currentStatus;
+
+	if (status == EStatus::FAILED)
+	{
+		currentStatus = EStatus::FAILED;
+		reset = true;
+		return;
+	}
+	else if (status == EStatus::SUCCESS)
 	{
 		++currentTaskIndex;
-		if (currentTaskIndex == tasksList.Num())
-		{
-			currentStatus = Status::SUCCESS;
-			reset = true;
-			return;
-		}
 	}
 }
 

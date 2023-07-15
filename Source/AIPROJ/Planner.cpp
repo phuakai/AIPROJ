@@ -15,7 +15,7 @@ APlanner::APlanner()
 // Called when the game starts or when spawned
 void APlanner::BeginPlay()
 {
-	root = beDonutShop;
+	//root = beDonutShop;
 	Super::BeginPlay();
 
 	// Initial generation
@@ -25,7 +25,7 @@ void APlanner::BeginPlay()
 	}
 
 	// Stores all of the tasks
-	allTasks.Emplace(&bakeDonutPrimitive);
+	allTasks.Emplace(bakeDonutPrimitive);
 
 	// Constructing BeDonutShopCompound
 

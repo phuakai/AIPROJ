@@ -25,24 +25,25 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	TMap<ANPC, Task*> queue;
+	TMap<ANPC, UTask*> queue;
 
 	//UPROPERTY(EditAnywhere)
-	TArray<Task*> allTasks;
+	TArray<UTask*> allTasks;
 
 	// Compund Tasks
-	BeDonutShopCompound beDonutShop;
+	BeDonutShopCompound* beDonutShop;
 
 	// Primitive Tasks
-	BakeDonutPrimitive bakeDonutPrimitive;
-
-	Task root;
+	UPROPERTY()
+	UBakeDonutPrimitive* bakeDonutPrimitive;
+	//UPROPERTY()
+	//UTask root;
 
 	UPROPERTY(EditAnywhere)
 	AZone* donutShop;
 
 	//UPROPERTY(EditAnywhere)
-	TArray<Task*> tasksInPlan;
+	TArray<UTask*> tasksInPlan;
 	 
 	void generatePlan();
 

@@ -60,19 +60,21 @@ public:
 	bool reset;
 };
 UCLASS()
-class AIPROJ_API UmakeDonut : public UPrimitiveTask
+class AIPROJ_API UBakeDonutPrimitive : public UPrimitiveTask
 {
 	GENERATED_BODY()
 public:
 	
 	bool checkPrecondition() override;
+	void run() override;
 
 };
 
-class AIPROJ_API runDonutShopCompound :public UCompoundTask
+class AIPROJ_API BeDonutShopCompound :public UCompoundTask
 {
 public:
 	//method?
+
 	BeDonutShopCompound();
 	void checkShopStatus();
 };

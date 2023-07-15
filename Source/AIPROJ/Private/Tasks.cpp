@@ -11,7 +11,7 @@ UTask::~UTask()
 {
 }
 
-runDonutShopCompound::runDonutShopCompound()
+BeDonutShopCompound::BeDonutShopCompound()
 {
 	//first is cook donuts
 	//makeDonut makeDonutTask;
@@ -22,17 +22,11 @@ runDonutShopCompound::runDonutShopCompound()
 	
 }
 
-void runDonutShopCompound::checkShopStatus()
+void BeDonutShopCompound::checkShopStatus()
 {
 	
 }
 
-bool UmakeDonut::checkPrecondition()
-{
-	if (theZone->cooksFree != 0)
-		return true;
-	return false;
-}
 
 bool UTask::checkPrecondition()
 {
@@ -83,30 +77,16 @@ void UCompoundTask::run()
 	}
 }
 
-bool BakeDonutPrimitive::checkPrecondition()
+bool UBakeDonutPrimitive::checkPrecondition()
 {
 	if (theZone->cooksFree != 0)
 		return true;
 	return false;
 }
 
-void BakeDonutPrimitive::run()
+void UBakeDonutPrimitive::run()
 {
 	check(GEngine != nullptr);
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("okay it comes innnn"));
 }
 
-BeDonutShopCompound::BeDonutShopCompound()
-{
-	//first is cook donuts
-	//makeDonut makeDonutTask;
-	//TArray<Task> cookDonuts;
-	//
-	//cookDonuts.Emplace(makeDonutTask);
-	//tasksList.Emplace(cookDonuts);
-}
-
-void BeDonutShopCompound::checkShopStatus()
-{
-	
-}

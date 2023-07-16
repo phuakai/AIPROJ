@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/Pawn.h"
 #include "NPC.generated.h"
 
 UENUM(BlueprintType)
@@ -15,7 +17,7 @@ enum class ETag : uint8
 };
 
 UCLASS()
-class AIPROJ_API ANPC : public AActor
+class AIPROJ_API ANPC : public ACharacter
 {
 	GENERATED_BODY()
 	

@@ -20,16 +20,3 @@ public:
 
 
 };
-
-UCLASS()
-class AIPROJ_API UNavigateTo :public UOperator
-{
-	GENERATED_BODY()
-public:
-	UNavigateTo();
-	~UNavigateTo();
-	//UFUNCTION()
-		virtual void run(ANPC* source, ANPC* dest) override;
-
-
-};

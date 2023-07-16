@@ -4,11 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "Widgets/SCompoundWidget.h"
-
+#include "DetailCustomizations.h"
+#include "IDetailCustomization.h"
+#include "DetailCategoryBuilder.h"
+#include "DetailLayoutBuilder.h"
+#include "DetailWidgetRow.h"
 /**
  * 
  */
-class TEST_API STaskViewer : public SCompoundWidget
+class TEST_API STaskViewer : public IDetailCustomization
 {
 public:
 	SLATE_BEGIN_ARGS(STaskViewer)
@@ -16,5 +20,7 @@ public:
 	SLATE_END_ARGS()
 
 	/** Constructs this widget with InArgs */
-	void Construct(const FArguments& InArgs);
+		static TSharedRef<IDetailCustomization> MakeInstance();
+
+	virtual void CustomizeDetails(IDetailLayoutBuilder& DetailLayout) override;
 };

@@ -17,19 +17,3 @@ void UOperator::run(ANPC* source, ANPC* dest)
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("DEFAULT OPERATOR RUN"));
 }
 
-UNavigateTo::UNavigateTo()
-{
-}
-
-UNavigateTo::~UNavigateTo()
-{
-}
-
-void UNavigateTo::run(ANPC* source, ANPC* dest)
-{
-	APawn* Pawn = Cast<APawn>(source->GetOwner());
-	if (IsValid(Pawn))
-	{
-		Cast<AAIController>(Pawn->GetController())->MoveToLocation(dest->GetActorLocation());
-	}
-}

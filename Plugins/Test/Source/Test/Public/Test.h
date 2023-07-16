@@ -26,6 +26,8 @@ private:
 
 	TSharedRef<class SDockTab> OnSpawnPluginTab(const class FSpawnTabArgs& SpawnTabArgs);
 
+	TSharedPtr<class IDetailsView> PropertyWidget;
+
 private:
 	TSharedPtr<class FUICommandList> PluginCommands;
 };

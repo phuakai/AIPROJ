@@ -7,6 +7,7 @@
 #include "Widgets/Docking/SDockTab.h"
 #include "Widgets/Layout/SBox.h"
 #include "Widgets/Text/STextBlock.h"
+#include "STaskViewer.h"
 #include "STestWidget.h"
 #include "ToolMenus.h"
 
@@ -22,7 +23,9 @@ void FTestModule::StartupModule()
 	FTestStyle::ReloadTextures();
 
 	FTestCommands::Register();
-	
+	FPropertyEditorModule& PropertyModule = FModuleManager::GetModuleChecked<FPropertyEditorModule>("PropertyEditor");
+
+	PropertyModule.RegisterCustomClassLayout("Planner", FOnGetDetailCustomizationInstance::CreateStatic(&STaskViewer::MakeInstance));
 	PluginCommands = MakeShareable(new FUICommandList);
 
 	PluginCommands->MapAction(
@@ -35,6 +38,8 @@ void FTestModule::StartupModule()
 	FGlobalTabmanager::Get()->RegisterNomadTabSpawner(TestTabName, FOnSpawnTab::CreateRaw(this, &FTestModule::OnSpawnPluginTab))
 		.SetDisplayName(LOCTEXT("FTestTabTitle", "Test"))
 		.SetMenuType(ETabSpawnerMenuType::Hidden);
+
+	PropertyModule.NotifyCustomizationModuleChanged();
 }
 
 void FTestModule::ShutdownModule()
@@ -51,22 +56,31 @@ void FTestModule::ShutdownModule()
 	FTestCommands::Unregister();
 
 	FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(TestTabName);
+	FPropertyEditorModule& PropertyModule = FModuleManager::GetModuleChecked<FPropertyEditorModule>("PropertyEditor");
+	PropertyModule.UnregisterCustomPropertyTypeLayout("Planner");
+	PropertyModule.NotifyCustomizationModuleChanged();
 }
 
 TSharedRef<SDockTab> FTestModule::OnSpawnPluginTab(const FSpawnTabArgs& SpawnTabArgs)
 {
+
+
+	FPropertyEditorModule& PropertyModule = FModuleManager::GetModuleChecked<FPropertyEditorModule>("PropertyEditor");
 	FText WidgetText = FText::Format(
 		LOCTEXT("WindowWidgetText", "AddADDADDADD code to {0} in {1} to override this window's contents"),
 		FText::FromString(TEXT("FTestModule::OnSpawnPluginTab")),
 		FText::FromString(TEXT("Test.cpp"))
 		);
-
+	FDetailsViewArgs DetailsViewArgs;
+	TSharedRef<IDetailsView> DetailsView = PropertyModule.CreateDetailView(DetailsViewArgs);
+	TArray< TWeakObjectPtr< UObject > > Objects;
+	DetailsView->GetSelectedObjects();
 	return SNew(SDockTab)
 		.TabRole(ETabRole::NomadTab)
 		[
 
-			SNew(STestWidget)
-
+			//SNew(STestWidget)
+			DetailsView
 
 
 		];

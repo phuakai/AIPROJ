@@ -20,7 +20,7 @@ enum class EStatus : uint8
 };
 
 
-UCLASS()
+UCLASS(Blueprintable, abstract)
 class AIPROJ_API UTask :public UObject
 {
 	GENERATED_BODY()
@@ -39,11 +39,11 @@ public:
 	TSoftObjectPtr<AZone> theZone;	
 	
 	UFUNCTION(BlueprintNativeEvent, Category = "Task Functions")
-	void reserveResouces();
-	void reserveResouces_Implementation();
+	void reserveResources();
+	void reserveResources_Implementation();
 	UFUNCTION(BlueprintNativeEvent, Category = "Task Functions")
-	void freeResouces();
-	void freeResouces_Implementation();
+	void freeResources();
+	void freeResources_Implementation();
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	EStatus currentStatus;
@@ -70,6 +70,8 @@ public:
 	void run_Implementation() override;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray< TSubclassOf<UTask>> tasksList;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TArray<UTask*> constructedTasks;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int currentTaskIndex;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)

@@ -2,6 +2,7 @@
 
 
 #include "Planner.h"
+#include "AssignChefsPrimitiveTask.h"
 
 
 // Sets default values
@@ -28,7 +29,6 @@ void APlanner::BeginPlay()
 	//allTasks.Emplace(bakeDonutPrimitive);
 
 	// Constructing BeDonutShopCompound
-
 }
 
 // Called every frame
@@ -58,16 +58,15 @@ void APlanner::Tick(float DeltaTime)
 
 	for (int i = 0; i < tasksInPlan.Num(); ++i)
 	{
-		tasksInPlan[i].GetDefaultObject()->run();
+		tasksInPlan[i]->run();
 
-		if (tasksInPlan[i].GetDefaultObject()->currentStatus == EStatus::SUCCESS ||
-			tasksInPlan[i].GetDefaultObject()->currentStatus == EStatus::FAILED)
+		if (tasksInPlan[i]->currentStatus == EStatus::SUCCESS ||
+			tasksInPlan[i]->currentStatus == EStatus::FAILED)
 		{
-			tasksInPlan[i].GetDefaultObject()->currentStatus = EStatus::PROCESSING;
-			donutShop->triggerPlanner = true;
-			//tasksInPlan[i].GetDefaultObject()->freeResouces();
-			//tasksInPlan.RemoveAt(i);
-			//--i;
+			tasksInPlan[i]->currentStatus = EStatus::PROCESSING;
+			tasksInPlan[i]->freeResources();
+			tasksInPlan.RemoveAt(i);
+			--i;
 		}
 	}
 }
@@ -76,12 +75,12 @@ void APlanner::generatePlan()
 {
 	for (int i = 0; i < allTasks.Num(); ++i)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("its hereee"));
-		if (allTasks[i].GetDefaultObject()->checkPrecondition() && !tasksInPlan.Contains(allTasks[i]))
+		if (allTasks[i].GetDefaultObject()->checkPrecondition()) // && !tasksInPlan.Contains(allTasks[i]))
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("its in"));
-			tasksInPlan.Emplace(allTasks[i]);
-			allTasks[i].GetDefaultObject()->reserveResouces();
+			UTask* newTask = NewObject<UTask>(this, allTasks[i]);
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("reserving"));
+			tasksInPlan.Emplace(newTask);
+			tasksInPlan[tasksInPlan.Num() - 1]->reserveResources();
 		}
 	}
 }

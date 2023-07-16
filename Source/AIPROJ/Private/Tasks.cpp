@@ -39,14 +39,19 @@ void UTask::run_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("DEFAULT CLASS RUN"));
 }
 
-void UTask::reserveResouces_Implementation()
+void UTask::reserveResources_Implementation()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("DEFAULT CLASS RESERVE RESOURCES"));
 }
 
-void UTask::freeResouces_Implementation()
+void UTask::freeResources_Implementation()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("DEFAULT CLASS FREE RESOURCES"));
+
+	if (theZone != nullptr)
+	{
+		theZone->triggerPlanner = true;
+	}
 }
 
 //void UTask::run()
@@ -82,15 +87,15 @@ void UCompoundTask::run_Implementation()
 		reset = false;
 	}
 
-	if (currentTaskIndex == tasksList.Num())
+	if (currentTaskIndex == constructedTasks.Num())
 	{
 		currentStatus = EStatus::SUCCESS;
 		reset = true;
 		return;
 	}
 
-	tasksList[currentTaskIndex].GetDefaultObject()->run();
-	auto status = tasksList[currentTaskIndex].GetDefaultObject()->currentStatus;
+	constructedTasks[currentTaskIndex]->run();
+	auto status = constructedTasks[currentTaskIndex]->currentStatus;
 
 	if (status == EStatus::FAILED)
 	{

@@ -42,8 +42,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	AZone* donutShop;
 
-	//UPROPERTY(EditAnywhere)
-	TArray<TSubclassOf<UTask>> tasksInPlan;
+	UPROPERTY(EditAnywhere)
+	TArray<UTask*> tasksInPlan;
 	 
 	void generatePlan();
 

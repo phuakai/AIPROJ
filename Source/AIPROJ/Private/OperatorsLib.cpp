@@ -11,9 +11,9 @@ void UOperatorsLib::test(int i )
 
 bool UOperatorsLib::Navigate(ANPC* source, FVector dest)
 {
-	if (IsValid(source) && source->GetActorLocation() != dest->GetActorLocation())
+	if (IsValid(source) && source->GetActorLocation() != dest)
 	{
-		Cast<AAIController>(source->GetController())->MoveToLocation(dest->GetActorLocation());
+		Cast<AAIController>(source->GetController())->MoveToLocation(dest);
 		return false;
 	}
 	else

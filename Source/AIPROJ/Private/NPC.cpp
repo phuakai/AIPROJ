@@ -14,7 +14,7 @@ ANPC::ANPC()
 void ANPC::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	SpawnDefaultController();
 }
 
 // Called every frame

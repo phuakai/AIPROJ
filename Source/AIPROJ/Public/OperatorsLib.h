@@ -15,5 +15,5 @@ class AIPROJ_API UOperatorsLib : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 
 		UFUNCTION(BlueprintCallable, Category = UOperatorsLib)
-		static void test();
+		static void test(int i);
 };

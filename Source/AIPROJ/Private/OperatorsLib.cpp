@@ -3,7 +3,7 @@
 
 #include "OperatorsLib.h"
 
-void UOperatorsLib::test()
+void UOperatorsLib::test(int i )
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("TestBlueprintLib"));
 }

@@ -11,12 +11,15 @@
  * 
  */
 
-enum class Status
+UENUM(BlueprintType)
+enum class EStatus : uint8
 {
-	PROCESSING,
-	FAILED,
-	SUCCESS
+	PROCESSING	UMETA(DisplayName = "Processing"),
+	FAILED		UMETA(DisplayName = "Failed"),
+	SUCCESS		UMETA(DisplayName = "Success")
 };
+
+
 UCLASS()
 class AIPROJ_API UTask :public UObject
 {
@@ -27,15 +30,23 @@ public:
 	UFUNCTION(BlueprintNativeEvent, Category = "Task Functions")
 	bool checkPrecondition();
 
-	bool checkPrecondition_Implementation();
+	virtual bool checkPrecondition_Implementation();
 	UFUNCTION(BlueprintNativeEvent, Category = "Task Functions")
 	void run();
-	void run_Implementation();
+	virtual void run_Implementation();
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	TSoftObjectPtr<AZone> theZone;
+	TSoftObjectPtr<AZone> theZone;	
+	
+	UFUNCTION(BlueprintNativeEvent, Category = "Task Functions")
+	void reserveResouces();
+	void reserveResouces_Implementation();
+	UFUNCTION(BlueprintNativeEvent, Category = "Task Functions")
+	void freeResouces();
+	void freeResouces_Implementation();
 
-	Status currentStatus;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	EStatus currentStatus;
 
 };
 
@@ -56,7 +67,7 @@ class AIPROJ_API UCompoundTask :public UTask
 	GENERATED_BODY()
 public:
 
-	void run();
+	void run_Implementation() override;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray< TSubclassOf<UTask>> tasksList;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)

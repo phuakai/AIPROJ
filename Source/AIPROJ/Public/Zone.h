@@ -36,6 +36,13 @@ public:
 		TArray<ANPC*> NPCList;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		ANPC* chef1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		ANPC* chef2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		ANPC* cashier;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool triggerPlanner = false;
 
 	// Getter / setter

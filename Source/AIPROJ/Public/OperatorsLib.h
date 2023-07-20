@@ -19,5 +19,8 @@ class AIPROJ_API UOperatorsLib : public UBlueprintFunctionLibrary
 		static void test(int i);
 
 		UFUNCTION(BlueprintCallable, Category = UOperatorsLib)
-		static bool Navigate(ANPC* source, ANPC* dest);
+		static bool Navigate(ANPC* source, FVector dest);
+
+		UFUNCTION(BlueprintCallable, Category = UOperatorsLib)
+		static void SetAnim(ANPC* source);
 };

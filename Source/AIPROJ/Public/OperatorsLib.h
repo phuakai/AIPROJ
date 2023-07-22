@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "NPC.h"
+#include <AIController.h>
 #include "OperatorsLib.generated.h"
 
 /**
@@ -21,6 +22,6 @@ class AIPROJ_API UOperatorsLib : public UBlueprintFunctionLibrary
 		UFUNCTION(BlueprintCallable, Category = UOperatorsLib)
 		static bool Navigate(ANPC* source, FVector dest);
 
-		UFUNCTION(BlueprintCallable, Category = UOperatorsLib)
-		static void SetAnim(ANPC* source);
+		/*UFUNCTION(BlueprintCallable, Category = UOperatorsLib)
+		static void SetAnim(ANPC* source);*/
 };

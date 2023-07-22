@@ -11,13 +11,42 @@ void UOperatorsLib::test(int i )
 
 bool UOperatorsLib::Navigate(ANPC* source, FVector dest)
 {
-	if (IsValid(source) && source->GetActorLocation() != dest)
+	static float timer = 0.0f;
+	static bool reset = true;
+
+	if (IsValid(source)/* && source->GetActorLocation() != dest*/)
 	{
-		Cast<AAIController>(source->GetController())->MoveToLocation(dest);
+		auto result = Cast<AAIController>(source->GetController())->MoveToLocation(dest);
+		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("%d"), Cast<AAIController>(source->GetController())->GetMoveStatus()));
+
+		timer += FApp::GetDeltaTime();
+
+		if (reset)
+		{
+			timer = 0.f;
+			reset = false;
+		}
+		if (timer >= 2 && source->GetVelocity().SquaredLength() <= 1)
+		{
+			reset = true;
+			return true;
+		}
+		
 		return false;
 	}
 	else
 	{
 		return true;
 	}
+
+	//if (IsValid(source))
+	//{
+	//	Cast<AAIController>(source->GetController())->MoveToLocation(dest,10,true,true,false,0,false);
+
+	//	if (Cast<AAIController>(source->GetController())->IsFollowingAPath())
+	//	{
+	//		return false;
+	//	}
+	//}
+	//return true;
 }

@@ -23,6 +23,7 @@ void APlanner::BeginPlay()
 	if (donutShop != nullptr)
 	{
 		donutShop->triggerPlanner = true;
+		donutShop->freeNPCs = donutShop->NPCList.Num();
 	}
 
 	// Stores all of the tasks
@@ -44,7 +45,7 @@ void APlanner::Tick(float DeltaTime)
 
 	check(GEngine != nullptr);
 	//GEngine->ClearOnScreenDebugMessages();
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("HIII :D"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("HIII :D"));
 
 	//FString counterText;
 		
@@ -78,7 +79,7 @@ void APlanner::generatePlan()
 		if (allTasks[i].GetDefaultObject()->checkPrecondition()) // && !tasksInPlan.Contains(allTasks[i]))
 		{
 			UTask* newTask = NewObject<UTask>(this, allTasks[i]);
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("reserving"));
+			//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("reserving"));
 			tasksInPlan.Emplace(newTask);
 			tasksInPlan[tasksInPlan.Num() - 1]->reserveResources();
 		}

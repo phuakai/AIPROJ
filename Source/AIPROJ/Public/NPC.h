@@ -13,7 +13,8 @@ enum class ETag : uint8
 {
 	DEFAULT		UMETA(DisplayName = "Default"),
 	WAITER		UMETA(DisplayName = "Waiter"),
-	COOK		UMETA(DisplayName = "Cook")
+	COOK		UMETA(DisplayName = "Cook"),
+	CUSTOMER	UMETA(DisplayName = "Customer")
 };
 
 UCLASS()

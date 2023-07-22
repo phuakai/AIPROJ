@@ -2,7 +2,7 @@
 
 
 #include "OperatorsLib.h"
-#include <AIController.h>
+
 
 void UOperatorsLib::test(int i )
 {
@@ -11,13 +11,13 @@ void UOperatorsLib::test(int i )
 
 bool UOperatorsLib::Navigate(ANPC* source, FVector dest)
 {
-	if (IsValid(source) && source->GetActorLocation() != dest)
+	if (IsValid(source))
 	{
-		Cast<AAIController>(source->GetController())->MoveToLocation(dest);
-		return false;
+		Cast<AAIController>(source->GetController())->MoveToLocation(dest, 10, true, true, false, 0, false);
+		if (Cast<AAIController>(source->GetController())->IsFollowingAPath())
+		{
+			return false;
+		}
 	}
-	else
-	{
-		return true;
-	}
+	return true;
 }

@@ -5,9 +5,7 @@
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "NPC.h"
-#include "AIController.h"
-#include "NavigationSystem.h"
-#include "BehaviorTree/BehaviorTreeTypes.h"
+#include <AIController.h>
 #include "OperatorsLib.generated.h"
 
 /**

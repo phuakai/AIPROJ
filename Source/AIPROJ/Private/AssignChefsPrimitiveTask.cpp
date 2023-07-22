@@ -5,7 +5,7 @@
 
 bool UAssignChefsPrimitiveTask::checkPrecondition_Implementation()
 {
-	if (theZone != nullptr && (theZone.Get()->chef1 == nullptr || theZone.Get()->chef2 == nullptr))
+	if (theZone != nullptr && theZone.Get()->chef1 == nullptr)
 	{
 		return true;
 	}
@@ -16,7 +16,7 @@ void UAssignChefsPrimitiveTask::run_Implementation()
 {
 	for (int i = 0; i < theZone.Get()->NPCList.Num(); ++i)
 	{
-		if (theZone.Get()->chef1 != nullptr && theZone.Get()->chef2 != nullptr)
+		if (theZone.Get()->chef1 != nullptr)
 		{
 			break;
 		}
@@ -29,11 +29,6 @@ void UAssignChefsPrimitiveTask::run_Implementation()
 			if (theZone.Get()->chef1 == nullptr)
 			{
 				theZone.Get()->chef1 = theZone.Get()->NPCList[i];
-				continue;
-			}
-			else if (theZone.Get()->chef2 == nullptr)
-			{
-				theZone.Get()->chef2 = theZone.Get()->NPCList[i];
 				continue;
 			}
 		}

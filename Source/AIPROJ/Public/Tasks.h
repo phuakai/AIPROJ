@@ -48,6 +48,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	EStatus currentStatus;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	ANPC* actor;
+
 };
 
 UCLASS(Blueprintable)

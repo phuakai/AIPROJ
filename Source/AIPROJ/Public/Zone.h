@@ -29,7 +29,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int tables;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int customers;
+		int freeNPCs;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int cooksFree;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -38,9 +38,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		ANPC* chef1;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		ANPC* chef2;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		ANPC* cashier;
+		TArray<ANPC*> customersInLine;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool triggerPlanner = false;
@@ -72,11 +70,11 @@ public:
 	// Customers
 	int getCustomers()
 	{
-		return customers;
+		return freeNPCs;
 	}
-	void setCustomers(int _customers)
+	void setCustomers(int _freeNPCs)
 	{
-		customers = _customers;
+		freeNPCs = _freeNPCs;
 		triggerPlanner = true;
 	}
 

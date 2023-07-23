@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "NPC.h"
+#include "Objects.h"
 #include "Zone.generated.h"
 
 UCLASS()
@@ -29,11 +30,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int tables;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<bool> tableVacant;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int freeNPCs;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int cooksFree;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<ANPC*> NPCList;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<AObjects*> ObjectList;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		ANPC* chef1;

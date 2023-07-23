@@ -20,10 +20,17 @@ void APlanner::BeginPlay()
 	Super::BeginPlay();
 
 	// Initial generation
-	if (donutShop != nullptr)
+	if (donutShop == nullptr)
 	{
-		donutShop->triggerPlanner = true;
-		donutShop->freeNPCs = donutShop->NPCList.Num();
+		return;
+	}
+
+	donutShop->triggerPlanner = true;
+	donutShop->freeNPCs = donutShop->NPCList.Num();
+
+	for (int i = 0; i < donutShop->tables; ++i)
+	{
+		donutShop->tableVacant.Emplace(true);
 	}
 
 	// Stores all of the tasks
@@ -68,6 +75,8 @@ void APlanner::Tick(float DeltaTime)
 			tasksInPlan[i]->freeResources();
 			tasksInPlan.RemoveAt(i);
 			--i;
+
+			donutShop->triggerPlanner = true;
 		}
 	}
 }
